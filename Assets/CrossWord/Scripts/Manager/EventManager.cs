@@ -35,6 +35,11 @@ namespace CrossWord.Scripts.Manager
         /// </summary>
         public static event Action OnTouchInputEnded;
 
+        /// <summary>
+        /// Event that called when the letter from player has collected.
+        /// </summary>
+        public static event Action<string> OnLetterCollected; 
+
         #endregion
 
         #region Broadcaster
@@ -75,6 +80,14 @@ namespace CrossWord.Scripts.Manager
         /// Broadcast the OnTouchInputEnded event when player remove the touch input,
         /// </summary>
         public static void BroadcastOnTouchInputEnded() => OnTouchInputEnded?.Invoke();
+
+        /// <summary>
+        /// Broadcast the OnLetterCollected event to check the word in word checker.
+        /// </summary>
+        /// <param name="word">
+        /// The word that wanted to check.
+        /// </param>
+        public static void BroadcastOnLetterCollected(string word) => OnLetterCollected?.Invoke(word);
 
         #endregion
     }
