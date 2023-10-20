@@ -1,4 +1,3 @@
-using System;
 using CrossWord.Scripts.Manager;
 using TMPro;
 using UnityEngine;

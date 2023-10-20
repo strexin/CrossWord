@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CrossWord.Scripts.Interfaces;
 using CrossWord.Scripts.Manager;
 using UnityEngine;
 
@@ -8,12 +7,12 @@ namespace CrossWord.Scripts.Gameplay
     /// <summary>
     /// Checking the collected letter with the correct word.
     /// </summary>
-    public class WordChecker : MonoBehaviour, IWordChecker
+    public class WordChecker : MonoBehaviour
     {
-        #region IWordChecker
+        #region Variable
 
         [field: SerializeField] 
-        public List<string> CorrectWord { get; set; } = null;
+        public List<string> correctWord { get; set; } = null;
 
         #endregion
 
@@ -41,24 +40,22 @@ namespace CrossWord.Scripts.Gameplay
         /// </param>
         private void CheckWord(string word)
         {
-            foreach (var correct in CorrectWord)
+            foreach (var correct in correctWord)
             {
                 if (correct == word)
                 {
-                    Debug.Log(word + " is correct");
+                    EventManager.BroadcastOnSubmitCorrectWord(correct);
 
-                    CorrectWord.Remove(correct);
+                    correctWord.Remove(correct);
 
-                    if (CorrectWord.Count == 0)
+                    if (correctWord.Count == 0)
                     {
-                        Debug.Log("Player win");
+                        EventManager.BroadcastOnCompleteLevel();
                     }
 
                     return;
                 }
             }
-            
-            Debug.Log("Wrong word");
         }
 
         #endregion
