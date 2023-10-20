@@ -38,7 +38,17 @@ namespace CrossWord.Scripts.Manager
         /// <summary>
         /// Event that called when the letter from player has collected.
         /// </summary>
-        public static event Action<string> OnLetterCollected; 
+        public static event Action<string> OnLetterCollected;
+
+        /// <summary>
+        /// Event that called when player submit the correct word.
+        /// </summary>
+        public static event Action<string> OnSubmitCorrectWord;
+
+        /// <summary>
+        /// Event that called when player complete current level.
+        /// </summary>
+        public static event Action OnCompleteLevel;
 
         #endregion
 
@@ -88,6 +98,19 @@ namespace CrossWord.Scripts.Manager
         /// The word that wanted to check.
         /// </param>
         public static void BroadcastOnLetterCollected(string word) => OnLetterCollected?.Invoke(word);
+
+        /// <summary>
+        /// Broadcast the OnSubmitCorrectWord event to display the correct word.
+        /// </summary>
+        /// <param name="word">
+        /// The correct word.
+        /// </param>
+        public static void BroadcastOnSubmitCorrectWord(string word) => OnSubmitCorrectWord?.Invoke(word);
+
+        /// <summary>
+        /// Broadcast the OnCompleteLevel event to display the win panel.
+        /// </summary>
+        public static void BroadcastOnCompleteLevel() => OnCompleteLevel?.Invoke();
 
         #endregion
     }
